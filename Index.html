@@ -1,1 +1,32 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose your device</title>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+        }
+        .desktop-icon::before {
+            content: "\1F5A5"; /* Unicode character for desktop icon */
+            margin-right: 5px;
+        }
+        .mobile-icon::before {
+            content: "\1F4BB"; /* Unicode character for tablet icon */
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="desktop.html" class="button desktop-icon">Desktop</a>
+    <a href="mobile.html" class="button mobile-icon">Mobile</a>
+</body>
+</html>
