@@ -1,94 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="6lH9TWwK-XNeGh3FKS3clFHoRvwan4xDUTF0dT-IoaM" />
-    <link rel="stylesheet" href="styles.css">
-    <title>Good Day</title>
+    <style>
+        /* Basic styling for the cards */
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px;
+            background-color: #f9f9f9;
+            position: relative; /* For positioning the time display */
+        }
+
+        /* Time display in the corner */
+        .time-corner {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        /* Individual card backgrounds */
+        .card1 { background-color: #ffc0cb; }
+        .card2 { background-color: #ffebcd; }
+        .card3 { background-color: #add8e6; }
+        .card4 { background-color: #98fb98; }
+        .card5 { background-color: #f0e68c; }
+        .card6 { background-color: #dda0dd; }
+    </style>
 </head>
 <body>
-<h1>Title Gap</h1>
-  <div class="clock"> <!-- Add a clock here -->
-        <h3 id="clock"></h3>
+    <div class="card card1">
+        <div class="time-corner">12:30 PM</div>
+        Card 1 Content
     </div>
-    <div class="container">
-        
-        <!-- Add more cards here -->
+    <div class="card card2">
+        <div class="time-corner">1:45 PM</div>
+        Card 2 Content
     </div>
-    <style>
-    /* styles.css */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden; /* Hide vertical scrollbar */
-}
+    <!-- Repeat similar divs for other cards (3 to 6) -->
 
-h1 {
-    text-align: center;
-    padding: 1rem;
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    height: 80vh;
-    overflow-x: hidden;
-    transition: transform 0.5s ease-out;
-    /* Add the following line to fix the issue */
-    width: 100%; /* Ensure the container takes up the full width */
-}
-
-.card {
-    min-width: 100%;
-    /* Additional card styling (e.g., background color, padding, etc.) */
-    /* Add the following line to ensure the card fills the container */
-    flex: 1;
-}
-    .clock{
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 1rem;
-    /* Additional clock styling (e.g., font color, background) */
-    }
-    </style>
+    <!-- Add JavaScript for swiping functionality (optional) -->
     <script>
-        // script.js
-const container = document.querySelector('.container');
-let startX, currentX;
-
-container.addEventListener('mousedown', (e) => {
-    startX = e.clientX;
-    container.style.transition = 'none';
-});
-
-container.addEventListener('mousemove', (e) => {
-    if (!startX) return;
-    currentX = e.clientX;
-    const diffX = currentX - startX;
-    container.style.transform = `translateX(${diffX}px)`;
-});
-
-container.addEventListener('mouseup', () => {
-    if (currentX) {
-        container.style.transition = 'transform 0.5s ease-out';
-        container.style.transform = 'translateX(0)';
-    }
-    startX = null;
-    currentX = null;
-});
-// script.js
-function updateClock() {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-}
-
-setInterval(updateClock, 1000); // Update every second
-
+        // You can use a library like Swiper.js for swipe gestures
+        // Initialize Swiper here
     </script>
 </body>
 </html>
