@@ -1,89 +1,72 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-site-verification" content="6lH9TWwK-XNeGh3FKS3clFHoRvwan4xDUTF0dT-IoaM" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swipeable Cards with Bing Daily Image</title>
-    <style>
-        /* Basic styling for the container */
-        .container {
-                 display: flex;
-            overflow-x: scroll; /* Enable horizontal scrolling/swiping */
-            gap: 16px; /* Space between cards */
-            padding: 16px;
-            background-image: url('https://bing.biturl.top'); /* Bing daily image as background */
-            background-size: cover; /* Scale the image to cover the container */
-            height: 100; /* Set container height to fill the entire viewport */
-        }
-        }
-
-        /* Individual card styling */
-        .card {
-            flex: 0 0 300px; /* Fixed card width */
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for readability */
-            border-radius: 8px;
-            padding: 16px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Card title styling */
-        .card h6 {
-            font-size: 14px;
-            margin: 0;
-            color: #333; /* Dark gray text color */
-        }
-
-        /* App grid button (positioned in the corner) */
-        .app-grid-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #0074D9;
-            color: #ffffff;
-            padding: 10px 16px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <title>Swipeable Cards</title>
 </head>
 <body>
+    <h1>Title Gap</h1>
     <div class="container">
-        <!-- Example cards -->
-        <div class="card">
-            <h6>Card 1 Title</h6>
-            <p>Card 1 content goes here...</p>
-        </div>
-        <div class="card">
-            <h6>Card 2 Title</h6>
-            <p>Card 2 content goes here...</p>
-        </div>
-        <div class="card">
-            <h6>Card 3 Title</h6>
-            <p>Card 3 content goes here...</p>
-        </div>
-        <div class="card">
-            <h6>Card 4 Title</h6>
-            <p>Card 4 content goes here...</p>
-        </div>
-        <div class="card">
-            <h6>Card 5 Title</h6>
-            <p>Card 5 content goes here...</p>
-        </div>
-        <div class="card">
-            <h6>Card 6 Title</h6>
-            <p>Card 6 content goes here...</p>
-        </div>
-        <!-- Add more cards if needed -->
+        <div class="card"><img src="img1.jpg" alt="Card 1"></div>
+        
+        <!-- Add more cards here -->
     </div>
+    <style>
+    /* styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Hide vertical scrollbar */
+}
 
-    <!-- App grid button -->
-    <div class="app-grid-button">App Grid</div>
+h1 {
+    text-align: center;
+    padding: 1rem;
+}
 
+.container {
+    display: flex;
+    align-items: center;
+    height: 80vh; /* Adjust as needed */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    transition: transform 0.5s ease-out; /* For swipe effect */
+}
+
+.card {
+    min-width: 100%;
+    /* Additional card styling (e.g., background color, padding, etc.) */
+}
+    
+    </style>
     <script>
-        // You can add JavaScript functionality here if needed
+        // script.js
+const container = document.querySelector('.container');
+let startX, currentX;
+
+container.addEventListener('mousedown', (e) => {
+    startX = e.clientX;
+    container.style.transition = 'none';
+});
+
+container.addEventListener('mousemove', (e) => {
+    if (!startX) return;
+    currentX = e.clientX;
+    const diffX = currentX - startX;
+    container.style.transform = `translateX(${diffX}px)`;
+});
+
+container.addEventListener('mouseup', () => {
+    if (currentX) {
+        container.style.transition = 'transform 0.5s ease-out';
+        container.style.transform = 'translateX(0)';
+    }
+    startX = null;
+    currentX = null;
+});
+
     </script>
 </body>
 </html>
