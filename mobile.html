@@ -4,41 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Display</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000; /* Night-friendly theme */
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-        #container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .card {
-            background-color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-    </style>
-</head>
-<body>
-      <div id="voiceAssistant"></div>
-    <button onclick="startListening()">Start Listening</button>
-    
-    
-    <div id="container">
-        <div class="card" id="weather"></div>
-        <div class="card" id="calendar"></div>
-        <div class="card" id="clock"></div>
-    </div>
-    <script>
+       <script>
         // Fetch weather data (replace with your API)
         async function getWeather() {
             try {
@@ -105,6 +71,41 @@
         speechSynthesis.speak(utterance);
     }
 </script>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background-color: #000; /* Night-friendly theme */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .card {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+      <div id="voiceAssistant"></div>
+    <button onclick="startListening()">Start Listening</button>
+    
+    
+    <div id="container">
+        <div class="card" id="weather"></div>
+        <div class="card" id="calendar"></div>
+        <div class="card" id="clock"></div>
+    </div>
+
     </script>
    
 </body>
