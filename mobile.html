@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="6lH9TWwK-XNeGh3FKS3clFHoRvwan4xDUTF0dT-IoaM" />
     <link rel="stylesheet" href="styles.css">
-    <title>Swipeable Cards</title>
+    <title>Good Day</title>
 </head>
 <body>
 <h1>Title Gap</h1>
@@ -33,18 +33,18 @@ h1 {
 .container {
     display: flex;
     align-items: center;
-    height: 80vh; /* Adjust as needed */
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-    transition: transform 0.5s ease-out; /* For swipe effect */
+    height: 80vh;
+    overflow-x: hidden;
+    transition: transform 0.5s ease-out;
+    /* Add the following line to fix the issue */
+    width: 100%; /* Ensure the container takes up the full width */
 }
 
-.card {    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    border: 4px solid #000; /* Add a 4px border */
-    transition: 0.3s;
-    border-radius: 5px; /* Optional: Add rounded corners */
+.card {
     min-width: 100%;
     /* Additional card styling (e.g., background color, padding, etc.) */
+    /* Add the following line to ensure the card fills the container */
+    flex: 1;
 }
     .clock{
     text-align: center;
