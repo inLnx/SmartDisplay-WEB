@@ -67,6 +67,20 @@
             speak('Sorry, I didn\'t understand.'); // Default response
         }
     }
+          const commns = [
+  "time",
+  "calendar",
+  "weather",
+  "bisque",
+  "black",
+  "blue",
+  "brown",
+  "chocolate",
+  "coral" /* … */,
+];
+const grammar = `#JSGF V1.0; grammar colors; public <color> = ${colors.join(
+  " | ",
+)};`;
 
     // Text-to-speech function
     function speak(text) {
@@ -111,6 +125,22 @@
     </div>
 
     </script>
-   
+    <script>
+  recognition.onresult = function(event) {
+    var interim_transcript = '';
+
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+            final_transcript += event.results[i][0].transcript;
+        } else {
+            interim_transcript += event.results[i][0].transcript;
+        }
+    }
+    final_transcript = capitalize(final_transcript);
+    final_span.innerHTML = linebreak(final_transcript);
+    interim_span.innerHTML = linebreak(interim_transcript);
+    };
+}
+                                          </script>
 </body>
 </html>
