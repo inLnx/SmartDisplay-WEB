@@ -8,9 +8,11 @@
     <title>Swipeable Cards</title>
 </head>
 <body>
-    <h1>Title Gap</h1>
+<h1>Title Gap</h1>
+  <div class="clock"> <!-- Add a clock here -->
+        <h3 id="clock"></h3>
+    </div>
     <div class="container">
-        <div class="card"><img src="img1.jpg" alt="Card 1"></div>
         
         <!-- Add more cards here -->
     </div>
@@ -40,7 +42,12 @@ h1 {
     min-width: 100%;
     /* Additional card styling (e.g., background color, padding, etc.) */
 }
-    
+    .clock{
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem;
+    /* Additional clock styling (e.g., font color, background) */
+    }
     </style>
     <script>
         // script.js
@@ -67,6 +74,16 @@ container.addEventListener('mouseup', () => {
     startX = null;
     currentX = null;
 });
+// script.js
+function updateClock() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+setInterval(updateClock, 1000); // Update every second
 
     </script>
 </body>
