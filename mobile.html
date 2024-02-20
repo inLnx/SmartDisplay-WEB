@@ -52,7 +52,7 @@
         </div>
         <div class="card" id="voice-assistant-card">
             <h2>Voice Assistant</h2>
-            <p id="input-area">Listening...</p>
+            <p id="input-area"></p>
             <p id="output-area"></p>
             <button id="listen-button" onclick="listen()">Listen</button>
         </div>
@@ -79,6 +79,21 @@
               console.log("Ready");
 
         }
+        const dosomething = [
+  "clock",
+  "calendar",
+  "traffic",
+  "time",
+  "black",
+  "blue",
+  "brown",
+  "chocolate",
+  "coral" /* … */,
+];
+const grammar = `#JSGF V1.0; grammar colors; public <color> = ${colors.join(
+  " | ",
+)};`;
+
     </script>
 </body>
 </html>
