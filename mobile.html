@@ -2,145 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <title>Smart Display</title>
-     
-</head>
-<body>
-      <script>
-        // Fetch weather data (replace with your API)
-        async function getWeather() {
-            try {
-                const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Redmond&appid=YOUR_API_KEY');
-                const data = await response.json();
-                const temperature = Math.round(data.main.temp - 273.15); // Convert to Celsius
-                const description = data.weather[0].description;
-                document.getElementById('weather').innerHTML = `Weather: ${description}, ${temperature}°C`;
-            } catch (error) {
-                console.error('Error fetching weather data:', error);
-            }
-        }
-        getWeather();
-
-        // Fetch calendar events (replace with your API)
-        async function getCalendarEvents() {
-            // Implement your logic here
-            // Example: Display upcoming events
-            const events = ['Meeting at 10 AM', 'Lunch with colleagues'];
-            document.getElementById('calendar').innerHTML = `Upcoming Events:<br>${events.join('<br>')}`;
-        }
-        getCalendarEvents();
-
-        // Update clock every second
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('clock').innerHTML = `Current Time: ${timeString}`;
-        }
-        setInterval(updateClock, 1000);
-    <script>
-    // Initialize the Web Speech API
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'en-US'; // Set the language (adjust as needed)
-
-    // Handle recognized speech
-    recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        handleVoiceCommand(transcript);
-    };
-
-    // Start listening when the button is clicked
-    function startListening() {
-        recognition.start();
-    }
-
-    // Handle voice commands
-    function handleVoiceCommand(command) {
-        // Implement your logic here based on recognized commands
-        if (command.includes('weather')) {
-            getWeather(); // Fetch weather data
-        } else if (command.includes('calendar')) {
-            getCalendarEvents(); // Fetch calendar events
-        } else if (command.includes('time')) {
-            updateClock(); // Update clock
-        } else {
-            speak('Sorry, I didn\'t understand.'); // Default response
-        }
-    }
-          const commns = [
-  "time",
-  "calendar",
-  "weather",
-  "bisque",
-  "black",
-  "blue",
-  "brown",
-  "chocolate",
-  "coral" /* … */,
-];
-const grammar = `#JSGF V1.0; grammar colors; public <color> = ${colors.join(
-  " | ",
-)};`;
-
-    // Text-to-speech function
-    function speak(text) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        speechSynthesis.speak(utterance);
-    }
-</script>
     <style>
         body {
-            font-family: Verdana, sans-serif;
-            background-color: #000; /* Night-friendly theme */
-            color: #fff;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
-        #container {
+        #main-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
         }
         .card {
-           
-            background-color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            height: 50px;
-            width: 50px;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin: 1rem;
+            max-width: 300px;
+            text-align: center;
         }
-    </style>  
-    <div id="voiceAssistant"></div>
-    <button onclick="startListening()">Start Listening</button>
-    
-    
-    <div id="container">
-        <div class="card" id="weather"></div>
-        <div class="card" id="calendar"></div>
-        <div class="card" ><h3 id="clock"></h3></div>
+        button {
+            background-color: #0074D9;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <div class="card" id="weather-card">
+            <h2>Weather</h2>
+            <iframe src="https://your-weather-widget-url.com" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="card" id="calendar-card">
+            <h2>Calendar</h2>
+            <iframe src="https://your-calendar-embed-url.com" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="card" id="time-card">
+            <h2>Time</h2>
+            <p id="clock"></p>
+        </div>
+        <div class="card" id="traffic-card">
+            <h2>Traffic</h2>
+            <iframe src="https://your-traffic-map-url.com" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="card" id="voice-assistant-card">
+            <h2>Voice Assistant</h2>
+            <p id="input-area">Listening...</p>
+            <p id="output-area"></p>
+            <button id="listen-button" onclick="listen()">Listen</button>
+        </div>
     </div>
-
-    </script>
     <script>
-  recognition.onresult = function(event) {
-    var interim_transcript = '';
-
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-            final_transcript += event.results[i][0].transcript;
-        } else {
-            interim_transcript += event.results[i][0].transcript;
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('clock').textContent = now.toLocaleTimeString();
         }
-    }
-    final_transcript = capitalize(final_transcript);
-    final_span.innerHTML = linebreak(final_transcript);
-    interim_span.innerHTML = linebreak(interim_transcript);
-    };
-}
-                                          </script>
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        function listen() {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.onresult = (event) => {
+                const userSpeech = event.results[0][0].transcript;
+                document.getElementById('input-area').textContent = userSpeech;
+                // Process userSpeech and generate a response
+                const response = generateResponse(userSpeech); // Implement your logic here
+                document.getElementById('output-area').textContent = response;
+            };
+            recognition.start();
+        }
+    </script>
 </body>
 </html>
